@@ -1,67 +1,114 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terminbestätigung</title>
+    <title>Terminbuchung</title>
     <style>
-        /* CSS für den schwarzen Hintergrund und die zentrierte Nachricht */
+        /* CSS für den schwarzen Hintergrund und das Layout */
         body {
             background-color: black;
-            color: white; /* Textfarbe auf Weiß gesetzt */
+            color: white; 
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; 
-            margin: 0;
-            text-align: center;
-        }
-
-        .confirmation-message {
-            font-size: 3.5em; /* Noch größere Schrift */
-            color: white; /* Textfarbe auf Weiß gesetzt */
-            line-height: 1.2;
             padding: 20px;
-            /* Umrandung und Schatten entfernt */
-            
-            /* CSS-Animation für das 3x Aufblinken */
-            animation: flash 1.5s ease-in-out 3; /* Blitzt 3x (1.5s Dauer) */
-            animation-fill-mode: forwards; /* Behält den Zustand nach der Animation bei */
         }
 
-        strong {
-            font-weight: 900;
-            color: #FF0000; /* Namen in Rot hervorheben */
+        h1 {
+            text-align: center;
+            color: #FF0000; /* Rote Akzentfarbe */
         }
 
-        /* Definition der Blink-Animation */
-        @keyframes flash {
-            0%, 100% { 
-                opacity: 1; 
-                color: white; /* Statische Farbe am Anfang und Ende */
-            }
-            15%, 45%, 75% { 
-                opacity: 0.1; 
-                color: #FF0000; /* Rotes Blinken */
-            }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background-color: #1a1a1a;
         }
 
-        /* Responsive Anpassungen */
-        @media (max-width: 600px) {
-            .confirmation-message {
-                font-size: 2em;
-                max-width: 90%;
-            }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="time"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            box-sizing: border-box; 
+            background-color: #333;
+            color: white;
+        }
+
+        button {
+            background-color: #FF0000; /* Rote Akzentfarbe */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #cc0000; /* Dunkleres Rot beim Hovern */
         }
     </style>
 </head>
 <body>
 
-    <div class="confirmation-message">
-        Herzlichen Glückwunsch Johannes, du hast dein Date mit Phil gebucht! ❤️
-    </div>
+    <h1>Terminbuchung</h1>
+
+    <form action="https://formsubmit.co/phillange@me.com>" method="POST">
+        
+        <input type="hidden" name="_next" value="https://philxlng.github.io/Bestaetigung/" />
+
+        <input type="hidden" name="_captcha" value="false">
+        
+        <input type="hidden" name="_subject" value="Neue Terminbuchung für Johannes und Phil!">
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="Name" required>
+
+        <label for="datum">Datum:</label>
+        <input type="date" id="datum" name="Datum" required>
+
+        <label for="uhrzeit">Uhrzeit:</label>
+        <input type="time" id="uhrzeit" name="Uhrzeit" required>
+
+        <label for="ort">Ort:</label>
+        <input type="text" id="ort" name="Ort" required>
+        
+        <button type="submit">Absenden</button>
+    </form>
+
+    <script>
+        function getTodayDate() {
+            const now = new Date();
+            const year = now.getFullYear();
+            let month = now.getMonth() + 1;
+            let day = now.getDate();
+
+            if (month < 10) {
+                month = '0' + month;
+            }
+            if (day < 10) {
+                day = '0' + day;
+            }
+            
+            return `${year}-${month}-${day}`;
+        }
+
+        document.getElementById('datum').min = getTodayDate();
+    </script>
 
 </body>
 </html>
